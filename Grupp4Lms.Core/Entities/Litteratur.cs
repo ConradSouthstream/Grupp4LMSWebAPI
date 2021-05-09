@@ -10,14 +10,16 @@ namespace Grupp4Lms.Core.Entities
         [Key]
         public int LitteraturId { get; set; }
 
+        [Required(ErrorMessage = "Ange titel")]
+        public string Titel { get; set; }
 
         [Required(ErrorMessage = "Ange utgivningsdatum")]
         public DateTime UtgivningsDatum { get; set; }
 
-
         [Required(ErrorMessage = "Skriv in en beskrivning")]
         public string Beskrivning { get; set; }
 
+        public string Url { get; set; }
 
         // Navigation properties
 
@@ -34,6 +36,6 @@ namespace Grupp4Lms.Core.Entities
         /// <summary>
         /// Litteratur kan ha flera författare
         /// </summary>
-        public ICollection<Forfattar> Forfattare { get; set; }
+        public ICollection<Forfattare> Forfattare { get; set; }
     }
 }

@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Grupp4Lms.Core.Entities
 {
-    public class Forfattar
+    public class Forfattare
     {
         [Key]
         public int ForfatterId { get; set; }
-
 
         [Required(ErrorMessage = "Ange författerens förnamn")]
         public string ForNamn { get; set; }
@@ -16,7 +15,6 @@ namespace Grupp4Lms.Core.Entities
 
         [Required(ErrorMessage = "Ange författerens efternamn")]
         public string EfterNamn { get; set; }
-
 
         [Required(ErrorMessage = "Ange författerens födelsedatum")]
         public DateTime FodelseDatum { get; set; }
@@ -26,6 +24,6 @@ namespace Grupp4Lms.Core.Entities
         /// <summary>
         /// En författare kan har skrivit flera olika litterära verk
         /// </summary>
-        public ICollection<Litteratur> Skrivit { get; set; }
+        public ICollection<Litteratur> Litteratur { get; set; }        
     }
 }

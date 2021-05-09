@@ -9,14 +9,19 @@ namespace Grupp4Lms.Data.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<Amne> Amne { get; set; }
+        public DbSet<Forfattare> Forfattar { get; set; }
+        public DbSet<Litteratur> Litteratur { get; set; }
+        public DbSet<Niva> Niva { get; set; }
+
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Amne> Amne { get; set; }
-        public DbSet<Forfattar> Forfattar { get; set; }
-        public DbSet<Litteratur> Litteratur { get; set; }
-        public DbSet<Niva> Niva { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }
