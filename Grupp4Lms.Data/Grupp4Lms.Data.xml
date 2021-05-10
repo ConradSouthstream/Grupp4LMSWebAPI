@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Grupp4Lms.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Grupp4Lms.Data.MapperProfiles.MapperProfile">
+            <summary>
+            Map metoder för automapper
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.MapperProfiles.MapperProfile.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Data.Repositories.KurslitteraturRepository">
+            <summary>
+            KurslitteraturRepository med metoder för att hämta Forfattare och Litteratur
+            </summary>
+        </member>
+        <member name="F:Grupp4Lms.Data.Repositories.KurslitteraturRepository.m_DbContext">
+            <summary>
+            Databas context
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.#ctor(Grupp4Lms.Data.Data.ApplicationDbContext)">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="context">Referense till context</param>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetLittaraturAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar sökt litteratur exklusive författare
+            </summary>
+            <param name="id">Id för sökt litteratur</param>
+            <returns>Task med sökt litteratur exklusive författare eller null</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetLitteraturAsync">
+            <summary>
+            Async metod som returnerar litteratur exklusive författare
+            </summary>
+            <returns>IEnumerable med Litteratur exklusive författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetLitteraturInklusiveForfattareAsync">
+            <summary>
+            Async metod som returnerar litteratur inklusive författare
+            </summary>
+            <returns>IEnumerable med Litteratur inklusive författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetLitteraturInklusiveForfattareAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar sökt litteratur inklusive författare
+            </summary>
+            <param name="id">Id för sökt litteratur</param>
+            <returns>Task med sökt litteratur inklusive författare eller null</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SaveAsync">
+            <summary>
+            Async metod som sparar ändringar
+            </summary>
+            <returns>true om några ändringar sparas. Annars returneras false</returns>
+        </member>
+        <member name="F:Grupp4Lms.Data.Repositories.UnitOfWork.m_dbContext">
+            <summary>
+            Databas context
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.UnitOfWork.#ctor(Grupp4Lms.Data.Data.ApplicationDbContext)">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="context">Referense till context</param>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.UnitOfWork.CompleteAsync">
+            <summary>
+            Async metod som skall spara uppdaterad data i repositories
+            </summary>
+            <returns>Task</returns>
+        </member>
+    </members>
+</doc>
