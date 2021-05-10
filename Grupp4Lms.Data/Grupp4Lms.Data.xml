@@ -4,6 +4,18 @@
         <name>Grupp4Lms.Data</name>
     </assembly>
     <members>
+        <member name="T:Grupp4Lms.Data.Data.Seed">
+            <summary>
+            Seed klass som skapar data i databasen
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.Data.Seed.InitAsync(System.IServiceProvider)">
+            <summary>
+            Async metod som skapar data i databasen
+            </summary>
+            <param name="services">IServiceProvider</param>
+            <returns>Task</returns>
+        </member>
         <member name="T:Grupp4Lms.Data.MapperProfiles.MapperProfile">
             <summary>
             Map metoder för automapper
@@ -12,6 +24,24 @@
         <member name="M:Grupp4Lms.Data.MapperProfiles.MapperProfile.#ctor">
             <summary>
             Konstruktor
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.MapperProfiles.MapperProfile.OtherMap">
+            <summary>
+            Mappers för Niva till NivaDto och
+            Amne till AmneDto
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.MapperProfiles.MapperProfile.ForfattareMap">
+            <summary>
+            Mappers för Forfattare till ForfattareDto och
+            Forfattare till ForfattareInklusiveLitteraturDto
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Data.MapperProfiles.MapperProfile.LitteraturMap">
+            <summary>
+            Mappers för Litteratur till LitteraturDto och 
+            Litteratur till LitteraturInklusiveForfattareDto
             </summary>
         </member>
         <member name="T:Grupp4Lms.Data.Repositories.KurslitteraturRepository">
@@ -56,15 +86,37 @@
             <param name="id">Id för sökt litteratur</param>
             <returns>Task med sökt litteratur inklusive författare eller null</returns>
         </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetNivaerAsync">
+            <summary>
+            Async metod som returnerar alla nivåer
+            </summary>
+            <returns>IEnumerable med alla nivåer</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetAmnenAsync">
+            <summary>
+            Async metod som returnerar alla ämnen
+            </summary>
+            <returns>IEnumerable med alla ämnen</returns>
+        </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SaveAsync">
             <summary>
             Async metod som sparar ändringar
             </summary>
             <returns>true om några ändringar sparas. Annars returneras false</returns>
         </member>
+        <member name="T:Grupp4Lms.Data.Repositories.UnitOfWork">
+            <summary>
+            Unit of work objektet som har alla repositories
+            </summary>
+        </member>
         <member name="F:Grupp4Lms.Data.Repositories.UnitOfWork.m_dbContext">
             <summary>
             Databas context
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Data.Repositories.UnitOfWork.KurslitteraturRepository">
+            <summary>
+            KurslitteraturRepository
             </summary>
         </member>
         <member name="M:Grupp4Lms.Data.Repositories.UnitOfWork.#ctor(Grupp4Lms.Data.Data.ApplicationDbContext)">

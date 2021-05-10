@@ -1,22 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Grupp4Lms.Core.Entities
+﻿namespace Grupp4Lms.Core.Dto
 {
     /// <summary>
-    /// Entititet för Ämne
+    /// Dto objekt för Amne
     /// </summary>
-    public class Amne
+    public class AmneDto
     {
         /// <summary>
         /// Amnets id
         /// </summary>
-        [Key]
         public int AmneId { get; set; }
 
         /// <summary>
         /// Amnets namn
         /// </summary>
-        [Required(ErrorMessage = "Ange namn på ämnet")]
         public string Namn { get; set; }
     }
 }

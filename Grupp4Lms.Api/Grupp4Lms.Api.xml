@@ -4,12 +4,33 @@
         <name>Grupp4Lms.Api</name>
     </assembly>
     <members>
+        <member name="T:Grupp4Lms.Api.Controllers.KurslitteraturController">
+            <summary>
+            KurslitteraturController med action för Litteratur, Forfattare, Amnen och Nivåer
+            </summary>
+        </member>
         <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.#ctor(Grupp4Lms.Core.IRepositories.IUnitOfWork,AutoMapper.IMapper)">
             <summary>
             Konstruktor
             </summary>
             <param name="uow">Unit of work. Används för att anropa olika Repository</param>
             <param name="mapper">Automapper</param>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetNivaer">
+            <summary>
+            GET: api/KurslitteraturController/GetNivaer
+            Async metod som returnerar IEnumarable med Nivåer
+            </summary>
+            <returns>Ok=200 och en lista med Nivåer</returns>
+            <response code="200">Returnerade lista med Nivåer i form av NivaDto objekt</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetAmnen">
+            <summary>
+            GET: api/KurslitteraturController/GetAmnen
+            Async metod som returnerar IEnumarable med Ämnen
+            </summary>
+            <returns>Ok=200 och en lista med Ämnen</returns>
+            <response code="200">Returnerade lista med Ämnen i form av AmneDto objekt</response>
         </member>
         <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetLitteraturen">
             <summary>

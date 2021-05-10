@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 
 namespace Grupp4Lms.Api.Controllers
 {
+    /// <summary>
+    /// KurslitteraturController med action för Litteratur, Forfattare, Amnen och Nivåer
+    /// </summary>
     [Produces("application/json", "application/xml")]
     [Route("api/[controller]")]
     [ApiController]
     public class KurslitteraturController : ControllerBase
     {
-        // TODO New version
         private readonly IUnitOfWork m_Uow;
         private readonly IMapper m_Mapper;
-
 
         /// <summary>
         /// Konstruktor
@@ -33,6 +34,71 @@ namespace Grupp4Lms.Api.Controllers
             m_Mapper = mapper;
         }
 
+
+        // GET api/<KurslitteraturController>/GetNivaer
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetNivaer
+        /// Async metod som returnerar IEnumarable med Nivåer
+        /// </summary>
+        /// <returns>Ok=200 och en lista med Nivåer</returns>
+        /// <response code="200">Returnerade lista med Nivåer i form av NivaDto objekt</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NivaDto))]
+        [HttpGet("GetNivaer")]
+        public async Task<ActionResult<IEnumerable<NivaDto>>>GetNivaer()
+        {
+            List<NivaDto> lsNivaer = null;
+            NivaDto dto = null;
+
+            // Hämta nivåerna från repository
+            var nivaer = await m_Uow.KurslitteraturRepository.GetNivaerAsync();
+            if(nivaer != null && nivaer.Count() > 0)
+            {
+                // Map Niva till NivaDto
+                lsNivaer = new List<NivaDto>(nivaer.Count());
+                foreach(Niva niva in nivaer)
+                {
+                    dto = m_Mapper.Map<NivaDto>(niva);
+                    if(dto != null)
+                        lsNivaer.Add(dto);
+                }
+            }
+
+            return Ok(lsNivaer);
+        }
+
+
+        // GET api/<KurslitteraturController>/GetAmnen
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetAmnen
+        /// Async metod som returnerar IEnumarable med Ämnen
+        /// </summary>
+        /// <returns>Ok=200 och en lista med Ämnen</returns>
+        /// <response code="200">Returnerade lista med Ämnen i form av AmneDto objekt</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AmneDto))]
+        [HttpGet("GetAmnen")]
+        public async Task<ActionResult<IEnumerable<AmneDto>>>GetAmnen()
+        {
+            List<AmneDto> lsAmnen = null;
+            AmneDto dto = null;
+
+            // Hämta alla ämnen från repository
+            var amnen = await m_Uow.KurslitteraturRepository.GetAmnenAsync();
+            if(amnen != null && amnen.Count() > 0)
+            {
+                // Map Amne till AmneDto
+                lsAmnen = new List<AmneDto>(amnen.Count());
+                foreach (Amne amne in amnen)
+                {
+                    dto = m_Mapper.Map<AmneDto>(amne);
+                    if (dto != null)
+                        lsAmnen.Add(dto);
+                }
+            }
+
+            return Ok(lsAmnen);
+        }
+
+        #region Action för att hämta litteratur exklusive författare
 
         // GET api/<KurslitteraturController>/GetLitteraturen
         /// <summary>
@@ -53,7 +119,7 @@ namespace Grupp4Lms.Api.Controllers
             var litteraturen = await m_Uow.KurslitteraturRepository.GetLitteraturAsync();
             if (litteraturen != null && litteraturen.Count() > 0)
             {
-                // Map kurslitteratur till dto
+                // Map litteratur till LitteraturDto
                 lsLitteraturDto = new List<LitteraturDto>(litteraturen.Count());
                 foreach (Litteratur lr in litteraturen)
                 {
@@ -94,6 +160,9 @@ namespace Grupp4Lms.Api.Controllers
             return Ok(dto);
         }
 
+        #endregion // End of region Action för att hämta litteratur exklusive författare
+
+        #region Action för att hämta litteratur inklusive författare
 
         // GET api/<KurslitteraturController>/GetLitteraturenInklusiveForfattare
         /// <summary>
@@ -110,11 +179,11 @@ namespace Grupp4Lms.Api.Controllers
             List<LitteraturInklusiveForfattareDto> lsLitteraturDto = null;
             LitteraturInklusiveForfattareDto dto = null;
 
-            // Hämta kurslitteratur
+            // Hämta litteratur
             var litteratur = await m_Uow.KurslitteraturRepository.GetLitteraturInklusiveForfattareAsync();
             if (litteratur != null && litteratur.Count() > 0)
             {
-                // Map kurslitteratur till dto
+                // Map litteratur till LitteraturInklusiveForfattareDto
                 lsLitteraturDto = new List<LitteraturInklusiveForfattareDto>(litteratur.Count());
                 foreach (Litteratur lr in litteratur)
                 {
@@ -143,17 +212,19 @@ namespace Grupp4Lms.Api.Controllers
         [HttpGet("GetLitteraturInklusiveForfattare/{id}")]
         public async Task<ActionResult<LitteraturInklusiveForfattareDto>> GetLitteraturInklusiveForfattare(int id)
         {
-            // Hämta kurslitteratur
+            // Hämta litteratur
             var litteratur = await m_Uow.KurslitteraturRepository.GetLitteraturInklusiveForfattareAsync(id);
 
             if (litteratur == null)
                 return NotFound();
 
-            // Map till LitteraturInklusiveForfattareDto
+            // Map litteratur till LitteraturInklusiveForfattareDto
             LitteraturInklusiveForfattareDto dto = m_Mapper.Map<LitteraturInklusiveForfattareDto>(litteratur);
 
             return Ok(dto);
         }
+
+        #endregion  // End of region Action för att hämta litteratur inklusive författare
 
 
 

@@ -85,6 +85,24 @@ namespace Grupp4Lms.Data.Repositories
         }
 
         /// <summary>
+        /// Async metod som returnerar alla nivåer
+        /// </summary>
+        /// <returns>IEnumerable med alla nivåer</returns>
+        public async Task<IEnumerable<Niva>> GetNivaerAsync()
+        {
+            return await m_DbContext.Niva.ToListAsync();
+        }
+
+        /// <summary>
+        /// Async metod som returnerar alla ämnen
+        /// </summary>
+        /// <returns>IEnumerable med alla ämnen</returns>
+        public async Task<IEnumerable<Amne>> GetAmnenAsync()
+        {
+            return await m_DbContext.Amne.ToListAsync();
+        }
+
+        /// <summary>
         /// Async metod som sparar ändringar
         /// </summary>
         /// <returns>true om några ändringar sparas. Annars returneras false</returns>

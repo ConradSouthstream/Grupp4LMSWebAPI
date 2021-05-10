@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Grupp4Lms.Data.Data
 {
+    /// <summary>
+    /// Seed klass som skapar data i databasen
+    /// </summary>
     public class Seed
     {
+        /// <summary>
+        /// Async metod som skapar data i databasen
+        /// </summary>
+        /// <param name="services">IServiceProvider</param>
+        /// <returns>Task</returns>
         public static async Task InitAsync(IServiceProvider services)
         {
             using (var db = services.GetRequiredService<ApplicationDbContext>())

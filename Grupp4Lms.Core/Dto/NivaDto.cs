@@ -1,22 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Grupp4Lms.Core.Entities
+﻿namespace Grupp4Lms.Core.Dto
 {
     /// <summary>
-    /// Entitet för Niva
+    /// Dto för literaturens nvå
     /// </summary>
-    public class Niva
+    public class NivaDto
     {
         /// <summary>
         /// Nivåns id
         /// </summary>
-        [Key]
         public int NivaId { get; set; }
 
         /// <summary>
         /// Nivåns namn
         /// </summary>
-        [Required(ErrorMessage = "Ange namn på nivån")]
         public string Namn { get; set; }
     }
 }

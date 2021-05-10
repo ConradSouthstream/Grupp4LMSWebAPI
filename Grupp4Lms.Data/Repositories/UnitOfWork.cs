@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Grupp4Lms.Data.Repositories
 {
+    /// <summary>
+    /// Unit of work objektet som har alla repositories
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         /// <summary>
@@ -11,6 +14,9 @@ namespace Grupp4Lms.Data.Repositories
         /// </summary>
         private readonly ApplicationDbContext m_dbContext;
 
+        /// <summary>
+        /// KurslitteraturRepository
+        /// </summary>
         public IKurslitteraturRepository KurslitteraturRepository { get; private set; }
 
 

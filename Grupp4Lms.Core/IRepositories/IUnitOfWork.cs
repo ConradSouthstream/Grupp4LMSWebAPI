@@ -2,6 +2,9 @@
 
 namespace Grupp4Lms.Core.IRepositories
 {
+    /// <summary>
+    /// Interface för unit of work objektet som har alla repositories
+    /// </summary>
     public interface IUnitOfWork
     {
         /// <summary>

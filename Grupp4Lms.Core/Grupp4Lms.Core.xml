@@ -4,9 +4,269 @@
         <name>Grupp4Lms.Core</name>
     </assembly>
     <members>
+        <member name="T:Grupp4Lms.Core.Dto.AmneDto">
+            <summary>
+            Dto objekt för Amne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.AmneDto.AmneId">
+            <summary>
+            Amnets id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.AmneDto.Namn">
+            <summary>
+            Amnets namn
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.ForfattareDto">
+            <summary>
+            Dto objekt för författare
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.ForfatterId">
+            <summary>
+            Författarens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.ForNamn">
+            <summary>
+            Författarens förnamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.EfterNamn">
+            <summary>
+            Författarens efternamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.FodelseDatum">
+            <summary>
+            Författarens födelsedatum
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto">
+            <summary>
+            Dto för en författare inklusive den litteratus som hen har varit med och skrivit
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.ForfatterId">
+            <summary>
+            Författarens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.ForNamn">
+            <summary>
+            Författarens förnamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.EfterNamn">
+            <summary>
+            Författarens efternamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.FodelseDatum">
+            <summary>
+            Författarens födelsedatum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.Litteratur">
+            <summary>
+            Litteratur som författaren har varit med och skrivit
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.LitteraturDto">
+            <summary>
+            Dto för litteratur
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.LitteraturId">
+            <summary>
+            Litteraturens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Titel">
+            <summary>
+            Litteraturens titel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.UtgivningsDatum">
+            <summary>
+            Litteraturens utgivningsdatum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Beskrivning">
+            <summary>
+            Beskrivning av Litteraturen
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Amne">
+            <summary>
+            Litteraturens ämens kategori
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Niva">
+            <summary>
+            Litteraturens nivå
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto">
+            <summary>
+            Dto för litteratur inklusive författare
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.LitteraturId">
+            <summary>
+            Litteraturens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Titel">
+            <summary>
+            Litteraturens titel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.UtgivningsDatum">
+            <summary>
+            Litteraturens utgivningsdatum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Beskrivning">
+            <summary>
+            Beskrivning av Litteraturen
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Amne">
+            <summary>
+            Litteraturens ämens kategori
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Niva">
+            <summary>
+            Litteraturens nivå
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto.Forfattare">
+            <summary>
+            Litteraturens författare
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.NivaDto">
+            <summary>
+            Dto för literaturens nvå
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.NivaDto.NivaId">
+            <summary>
+            Nivåns id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.NivaDto.Namn">
+            <summary>
+            Nivåns namn
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Entities.Amne">
+            <summary>
+            Entititet för Ämne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Amne.AmneId">
+            <summary>
+            Amnets id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Amne.Namn">
+            <summary>
+            Amnets namn
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Entities.Forfattare">
+            <summary>
+            Entititet för författaren
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Forfattare.ForfatterId">
+            <summary>
+            Författarens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Forfattare.ForNamn">
+            <summary>
+            Författarens Förnamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Forfattare.EfterNamn">
+            <summary>
+            Författarens Efternamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Forfattare.FodelseDatum">
+            <summary>
+            Författarens födelsedatum
+            </summary>
+        </member>
         <member name="P:Grupp4Lms.Core.Entities.Forfattare.Litteratur">
             <summary>
             En författare kan har skrivit flera olika litterära verk
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Entities.Litteratur">
+            <summary>
+            Entitet för Litteratur
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.LitteraturId">
+            <summary>
+            Litteraturens id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.Titel">
+            <summary>
+            Litteraturens titel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.UtgivningsDatum">
+            <summary>
+            Litteraturens datum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.Beskrivning">
+            <summary>
+            Beskrivning av litteraturen
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.AmneId">
+            <summary>
+            ForeignKey till litteraturen Ämne i tabellen Amne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.Amne">
+            <summary>
+            Litteraturens ämne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.NivaId">
+            <summary>
+            ForeignKey till literaturens nivå i tabellen Niva
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Litteratur.Niva">
+            <summary>
+            Litteraturens nivå
             </summary>
         </member>
         <member name="P:Grupp4Lms.Core.Entities.Litteratur.Forfattare">
@@ -14,16 +274,25 @@
             Litteratur kan ha flera författare
             </summary>
         </member>
+        <member name="T:Grupp4Lms.Core.Entities.Niva">
+            <summary>
+            Entitet för Niva
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Niva.NivaId">
+            <summary>
+            Nivåns id
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Entities.Niva.Namn">
+            <summary>
+            Nivåns namn
+            </summary>
+        </member>
         <member name="T:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository">
             <summary>
             Interface för KurslitteraturRepository
             </summary>
-        </member>
-        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SaveAsync">
-            <summary>
-            Async metod som sparar ändringar
-            </summary>
-            <returns>true om några ändringar sparas. Annars returneras false</returns>
         </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetLitteraturAsync">
             <summary>
@@ -50,6 +319,29 @@
             </summary>
             <param name="id">Id för sökt litteratur</param>
             <returns>Task med sökt litteratur inklusive författare eller null</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetNivaerAsync">
+            <summary>
+            Async metod som returnerar alla nivåer
+            </summary>
+            <returns>IEnumerable med alla nivåer</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetAmnenAsync">
+            <summary>
+            Async metod som returnerar alla ämnen
+            </summary>
+            <returns>IEnumerable med alla ämnen</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SaveAsync">
+            <summary>
+            Async metod som sparar ändringar
+            </summary>
+            <returns>true om några ändringar sparas. Annars returneras false</returns>
+        </member>
+        <member name="T:Grupp4Lms.Core.IRepositories.IUnitOfWork">
+            <summary>
+            Interface för unit of work objektet som har alla repositories
+            </summary>
         </member>
         <member name="P:Grupp4Lms.Core.IRepositories.IUnitOfWork.KurslitteraturRepository">
             <summary>

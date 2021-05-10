@@ -10,12 +10,6 @@ namespace Grupp4Lms.Core.IRepositories
     public interface IKurslitteraturRepository
     {
         /// <summary>
-        /// Async metod som sparar ändringar
-        /// </summary>
-        /// <returns>true om några ändringar sparas. Annars returneras false</returns>
-        Task<bool> SaveAsync();
-
-        /// <summary>
         /// Async metod som returnerar litteratur exklusive författare
         /// </summary>
         /// <returns>Task IEnumerable med Litteratur exklusive författare</returns>
@@ -39,6 +33,24 @@ namespace Grupp4Lms.Core.IRepositories
         /// </summary>
         /// <param name="id">Id för sökt litteratur</param>
         /// <returns>Task med sökt litteratur inklusive författare eller null</returns>
-        Task<Litteratur>GetLitteraturInklusiveForfattareAsync(int id);        
+        Task<Litteratur>GetLitteraturInklusiveForfattareAsync(int id);
+
+        /// <summary>
+        /// Async metod som returnerar alla nivåer
+        /// </summary>
+        /// <returns>IEnumerable med alla nivåer</returns>
+        Task<IEnumerable<Niva>> GetNivaerAsync();
+
+        /// <summary>
+        /// Async metod som returnerar alla ämnen
+        /// </summary>
+        /// <returns>IEnumerable med alla ämnen</returns>
+        Task<IEnumerable<Amne>> GetAmnenAsync();
+
+        /// <summary>
+        /// Async metod som sparar ändringar
+        /// </summary>
+        /// <returns>true om några ändringar sparas. Annars returneras false</returns>
+        Task<bool> SaveAsync();
     }
 }
