@@ -126,12 +126,57 @@
         </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SearchLitteraturInklusiveForfattareAsyn(System.String,System.String,System.Int32)">
             <summary>
-            Async metod som söker efter litteratur som matchar de olika sökt pararmetrarna
+            Async metod som söker efter litteratur som matchar de olika sök parametrarna
             </summary>
-            <param name="strTitel">Titel som vi vill söka på. Kan vara null eller empty string</param>
-            <param name="strForfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="strTitel">Titel som vi vill söka på. Kontrollerar om titel innehåller sökt text. Kan vara null eller empty string</param>
+            <param name="strForfattare">Namn på författaren som vi vill söka på. Kontrollerar om förnamn eller efternamn innehåller det som söks. Kan vara null eller empty string</param>
             <param name="iAmne">Id för ämne som vi vill söka på. Default är -1 och då söker vi inte på ämne</param>
             <returns>Task IEnumerable med Litteratur inklusive författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.PostLitteraturAsync(Grupp4Lms.Core.Entities.Litteratur)">
+            <summary>
+            Async metod som sparar en ny litteratur, inklusive författare i databasen. Det behöver inte finnas några författare
+            </summary>
+            <param name="litteratur">Den nya litteraturen som även kan innehålla författare</param>
+            <returns>Task</returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.PutLitteratur(Grupp4Lms.Core.Entities.Litteratur)">
+            <summary>
+            Metod som uppdaterar information om litteratur
+            </summary>
+            <param name="litteratur">Litteratur som vi skall uppdatera</param>
+            <returns>void</returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.LitteraturExistsAsync(System.Int32)">
+            <summary>
+            Async metod som kontrollerar om litteraturen finns
+            </summary>
+            <param name="id">Id för litteraturen som vi söker</param>
+            <returns>true om sökt literatur finns. Annars returneras false</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.PutForfattare(Grupp4Lms.Core.Entities.Forfattare)">
+            <summary>
+            Metod som uppdaterar information om en författare
+            </summary>
+            <param name="forfattare">Författare som skall uppdateras</param>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.PostForfattareAsync(Grupp4Lms.Core.Entities.Forfattare)">
+            <summary>
+            Async metod som skapa ett nytt forfattare objekt i repository
+            </summary>
+            <param name="forfattare">Den nya författaren</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.ForfattareExistsAsync(System.Int32)">
+            <summary>
+            Async metod som kontrollerar om författaren finns
+            </summary>
+            <param name="id">Id för författaren som vi söker</param>
+            <returns>true om sökt literatur finns. Annars returneras false</returns>
         </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SaveAsync">
             <summary>

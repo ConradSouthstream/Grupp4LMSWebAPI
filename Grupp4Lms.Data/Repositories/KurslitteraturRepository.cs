@@ -311,6 +311,98 @@ namespace Grupp4Lms.Data.Repositories
 
 
         /// <summary>
+        /// Async metod som sparar en ny litteratur, inklusive författare i databasen. Det behöver inte finnas några författare
+        /// </summary>
+        /// <param name="litteratur">Den nya litteraturen som även kan innehålla författare</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        public async Task PostLitteraturAsync(Litteratur litteratur)
+        {
+            if (litteratur is null)
+                throw new ArgumentNullException("KurslitteraturRepository. PostLitteraturAsync. Reference to litteratur is null");
+
+            await m_DbContext.Litteratur.AddAsync(litteratur);
+        }
+
+
+        /// <summary>
+        /// Metod som uppdaterar information om litteratur
+        /// </summary>
+        /// <param name="litteratur">Litteratur som vi skall uppdatera</param>
+        /// <returns>void</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        public void PutLitteratur(Litteratur litteratur)
+        {
+            if (litteratur is null)
+                throw new ArgumentNullException("KurslitteraturRepository. PutLitteratur. Reference to litteratur is null");
+
+            m_DbContext.Entry(litteratur).State = EntityState.Modified;
+        }
+
+        /// <summary>
+        /// Async metod som kontrollerar om litteraturen finns
+        /// </summary>
+        /// <param name="id">Id för litteraturen som vi söker</param>
+        /// <returns>true om sökt literatur finns. Annars returneras false</returns>
+        public async Task<bool> LitteraturExistsAsync(int id)
+        {
+            bool bLitteraturExists = true;
+
+            var litteratur = await m_DbContext.Litteratur.Where(l => l.LitteraturId == id).FirstOrDefaultAsync();
+            if (litteratur is null)
+                bLitteraturExists = false;
+
+            return bLitteraturExists;
+        }
+
+
+        /// <summary>
+        /// Metod som uppdaterar information om en författare
+        /// </summary>
+        /// <param name="forfattare">Författare som skall uppdateras</param>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        public void PutForfattare(Forfattare forfattare)
+        {
+            if (forfattare is null)
+                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareAsync. Reference to forfattaren is null");
+
+            m_DbContext.Entry(forfattare).State = EntityState.Modified;
+        }
+
+
+        /// <summary>
+        /// Async metod som skapa ett nytt forfattare objekt i repository
+        /// </summary>
+        /// <param name="forfattare">Den nya författaren</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        public async Task PostForfattareAsync(Forfattare forfattare)
+        {
+            if (forfattare is null)
+                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareAsync. Reference to forfattaren is null");
+
+            await m_DbContext.Forfattar.AddAsync(forfattare);
+        }
+
+
+        /// <summary>
+        /// Async metod som kontrollerar om författaren finns
+        /// </summary>
+        /// <param name="id">Id för författaren som vi söker</param>
+        /// <returns>true om sökt literatur finns. Annars returneras false</returns>
+        public async Task<bool> ForfattareExistsAsync(int id)
+        {
+            bool bForfattareExists = true;
+
+            var forfattare = await m_DbContext.Forfattar.Where(f => f.ForfatterId == id).FirstOrDefaultAsync();
+            if (forfattare is null)
+                bForfattareExists = false;
+
+            return bForfattareExists;
+        }
+
+
+        /// <summary>
         /// Async metod som sparar ändringar
         /// </summary>
         /// <returns>true om några ändringar sparas. Annars returneras false</returns>

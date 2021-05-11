@@ -42,6 +42,10 @@ namespace Grupp4Lms.Data.MapperProfiles
 
             CreateMap<Forfattare, ForfattareInklusiveLitteraturDto>()
                 .ForMember(dest => dest.Age, from => from.MapFrom(fd => ForfattareHelper.CalculateAge(fd.FodelseDatum)));
+
+            CreateMap<CreateForfattareDto, Forfattare>();
+
+            CreateMap<EditForfattareDto, Forfattare>();
         }
 
 
@@ -58,6 +62,10 @@ namespace Grupp4Lms.Data.MapperProfiles
             CreateMap<Litteratur, LitteraturInklusiveForfattareDto>()
                 .ForMember(dest => dest.Amne, from => from.MapFrom(a => a.Amne.Namn))
                 .ForMember(dest => dest.Niva, from => from.MapFrom(n => n.Niva.Namn));
+
+            CreateMap<CreateLitteraturDto, Litteratur>();
+
+            CreateMap<EditLitteraturDto, Litteratur>();
         }
     }
 }

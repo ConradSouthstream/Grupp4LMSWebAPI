@@ -113,5 +113,67 @@
             <param name="amne">Id för ämne som vi vill söka på. Kan vara 0 eller -1 och då söker vi inte på ämne</param>
             <returns>Ok=200 och IEnumerable med litteratur inklusive författare som matchar sökningen</returns>
         </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PostLitteratur(Grupp4Lms.Core.Dto.CreateLitteraturDto)">
+            <summary>
+            Async metod som skapar ny litteratur
+            </summary>
+            <param name="dto">CreateLitteraturDto med information om litteratur och eventuella författare</param>
+            <returns>Om det gick bra returneras Ok = 200.
+            Om ModelState ej är valid returneras BadRequest = 400.
+            Om det inte gick uppdatera litteraturen returneras StatusCode = 500
+            </returns>
+            <response code="200">Skapandet av litteraturen gick bra</response>
+            <response code="400">ModelState isn't valid</response>
+            <response code="500">Det gick inte skapa litteraturen</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PutLitteraturAsync(System.Int32,Grupp4Lms.Core.Dto.EditLitteraturDto)">
+            <summary>
+            PUT: api/KursLitteratur/5
+            Put, update/replace, litteratur
+            </summary>
+            <param name="id">id för litteratur som skall uppdateras</param>
+            <param name="dto">Information om litteraturen som skall uppdateras</param>
+            <returns>Om det gick bra returneras Ok = 200. 
+            Om id och CreateLitteraturDto ej har samma id returneras BadRequest = 400. 
+            Om ModelState ej är valid returneras BadRequest = 400.
+            Om litteraturen som skall uppdateras inte finns returneras NotFound = 404.
+            Om det inte gick uppdatera litteraturen returneras StatusCode = 500
+            </returns>
+            <response code="200">Uppdatering av litteraturen gick bra</response>
+            <response code="400">Id och litteraturen id är inte samma eller ModelState isn't valid</response>
+            <response code="404">Litteraturen som skall uppdateras finns ej</response>
+            <response code="500">Det gick inte uppdatera informationen om litteraturen</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PostForfattare(Grupp4Lms.Core.Dto.CreateForfattareDto)">
+            <summary>
+            Async metod som skapar ny författare
+            </summary>
+            <param name="dto">CreateForfattareDto med information om forfattaren</param>
+            <returns>Om det gick bra returneras Ok = 200.
+            Om ModelState ej är valid returneras BadRequest = 400.
+            Om det inte gick uppdatera forfattaren returneras StatusCode = 500
+            </returns>
+            <response code="200">Skapandet av forfattaren gick bra</response>
+            <response code="400">ModelState isn't valid</response>
+            <response code="500">Det gick inte skapa forfattaren</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PutForfattareAsync(System.Int32,Grupp4Lms.Core.Dto.EditForfattareDto)">
+            <summary>
+            PUT: api/KursLitteratur/5
+            Put, update/replace, forfattare
+            </summary>
+            <param name="id">id för forfattaren som skall uppdateras</param>
+            <param name="dto">Information om forfattaren som skall uppdateras</param>
+            <returns>Om det gick bra returneras Ok = 200. 
+            Om id och EditForfattareDto ej har samma id returneras BadRequest = 400. 
+            Om ModelState ej är valid returneras BadRequest = 400.
+            Om forfattaren som skall uppdateras inte finns returneras NotFound = 404.
+            Om det inte gick uppdatera författaren returneras StatusCode = 500
+            </returns>
+            <response code="200">Uppdatering av forfattaren gick bra</response>
+            <response code="400">Id och forfattare id är inte samma eller ModelState isn't valid</response>
+            <response code="404">forfattaren som skall uppdateras finns ej</response>
+            <response code="500">Det gick inte uppdatera informationen om forfattaren</response>
+        </member>
     </members>
 </doc>

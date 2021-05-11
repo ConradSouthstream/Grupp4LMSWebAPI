@@ -19,6 +19,131 @@
             Amnets namn
             </summary>
         </member>
+        <member name="T:Grupp4Lms.Core.Dto.CreateForfattareDto">
+            <summary>
+            Dto för att skapa en författare
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateForfattareDto.ForNamn">
+            <summary>
+            Författarens Förnamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateForfattareDto.EfterNamn">
+            <summary>
+            Författarens Efternamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateForfattareDto.FodelseDatum">
+            <summary>
+            Författarens födelsedatum
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.CreateLitteraturDto">
+            <summary>
+            Dto för att skapa litteratur
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.Titel">
+            <summary>
+            Litteraturens titel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.UtgivningsDatum">
+            <summary>
+            Litteraturens datum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.Beskrivning">
+            <summary>
+            Beskrivning av litteraturen
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.AmneId">
+            <summary>
+            ForeignKey till litteraturen Ämne i tabellen Amne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.NivaId">
+            <summary>
+            ForeignKey till literaturens nivå i tabellen Niva
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.CreateLitteraturDto.Forfattare">
+            <summary>
+            Litteratur kan ha flera författare
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.EditForfattareDto">
+            <summary>
+            Dto för att redigera forfattaren
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditForfattareDto.ForfatterId">
+            <summary>
+            Författarens primärnyckel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditForfattareDto.ForNamn">
+            <summary>
+            Författarens Förnamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditForfattareDto.EfterNamn">
+            <summary>
+            Författarens Efternamn
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditForfattareDto.FodelseDatum">
+            <summary>
+            Författarens födelsedatum
+            </summary>
+        </member>
+        <member name="T:Grupp4Lms.Core.Dto.EditLitteraturDto">
+            <summary>
+            Dto för att redigera litteratur
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.LitteraturId">
+            <summary>
+            Litteraturens primärnyckel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.Titel">
+            <summary>
+            Litteraturens titel
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.UtgivningsDatum">
+            <summary>
+            Litteraturens datum
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.Beskrivning">
+            <summary>
+            Beskrivning av litteraturen
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.AmneId">
+            <summary>
+            ForeignKey till litteraturen Ämne i tabellen Amne
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.EditLitteraturDto.NivaId">
+            <summary>
+            ForeignKey till literaturens nivå i tabellen Niva
+            </summary>
+        </member>
         <member name="T:Grupp4Lms.Core.Dto.ForfattareDto">
             <summary>
             Dto objekt för författare
@@ -362,10 +487,55 @@
             <summary>
             Async metod som söker efter litteratur som matchar de olika sökt pararmetrarna
             </summary>
-            <param name="strTitel">Titel som vi vill söka på. Kan vara null eller empty string</param>
-            <param name="strForfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="strTitel">Titel som vi vill söka på. Kontrollerar om titel innehåller sökt text. Kan vara null eller empty string</param>
+            <param name="strForfattare">Namn på författaren som vi vill söka på. Kontrollerar om förnamn eller efternamn innehåller det som söks. Kan vara null eller empty string</param>
             <param name="iAmne">Id för ämne som vi vill söka på. Default är -1 och då söker vi inte på ämne</param>
             <returns>Task IEnumerable med Litteratur inklusive författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.PostLitteraturAsync(Grupp4Lms.Core.Entities.Litteratur)">
+            <summary>
+            Async metod som sparar en ny litteratur, inklusive författare i databasen. Det behöver inte finnas några författare
+            </summary>
+            <param name="litteratur">Den nya litteraturen som även kan innehålla författare</param>
+            <returns>Task</returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.PutLitteratur(Grupp4Lms.Core.Entities.Litteratur)">
+            <summary>
+            Metod som uppdaterar information om litteratur
+            </summary>
+            <param name="litteratur">Litteratur som vi skall uppdatera</param>
+            <returns>Task</returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.LitteraturExistsAsync(System.Int32)">
+            <summary>
+            Async metod som kontrollerar om litteraturen finns
+            </summary>
+            <param name="id">Id för litteraturen som vi söker</param>
+            <returns>true om sökt literatur finns. Annars returneras false</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.PutForfattare(Grupp4Lms.Core.Entities.Forfattare)">
+            <summary>
+            Metod som uppdaterar information om en författare
+            </summary>
+            <param name="forfattare">Författare som skall uppdateras</param>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.PostForfattareAsync(Grupp4Lms.Core.Entities.Forfattare)">
+            <summary>
+            Async metod som skapa ett nytt forfattare objekt i repository
+            </summary>
+            <param name="forfattare">Den nya författaren</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.ForfattareExistsAsync(System.Int32)">
+            <summary>
+            Async metod som kontrollerar om författaren finns
+            </summary>
+            <param name="id">Id för författaren som vi söker</param>
+            <returns>true om sökt literatur finns. Annars returneras false</returns>
         </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SaveAsync">
             <summary>

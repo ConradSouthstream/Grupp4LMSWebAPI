@@ -4,6 +4,7 @@ using Grupp4Lms.Core.Entities;
 using Grupp4Lms.Core.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace Grupp4Lms.Api.Controllers
             m_Mapper = mapper;
         }
 
+        #region Action för att hämta nivåer
 
         // GET api/<KurslitteraturController>/GetNivaer
         /// <summary>
@@ -67,6 +69,9 @@ namespace Grupp4Lms.Api.Controllers
             return Ok(lsNivaer);
         }
 
+        #endregion // End of region Action för att hämta nivåer
+
+        #region Action för att hämta Ämnen
 
         // GET api/<KurslitteraturController>/GetAmnen
         /// <summary>
@@ -98,6 +103,8 @@ namespace Grupp4Lms.Api.Controllers
 
             return Ok(lsAmnen);
         }
+
+        #endregion // End of region Action för att hämta Ämnen
 
         #region Action för att hämta litteratur exklusive författare
 
@@ -397,6 +404,208 @@ namespace Grupp4Lms.Api.Controllers
         }
 
         #endregion // End of region Action för sökning av kurslitteratur
+
+        #region Action för att skapa och uppdatera litteratur
+
+        /// <summary>
+        /// Async metod som skapar ny litteratur
+        /// </summary>
+        /// <param name="dto">CreateLitteraturDto med information om litteratur och eventuella författare</param>
+        /// <returns>Om det gick bra returneras Ok = 200.
+        /// Om ModelState ej är valid returneras BadRequest = 400.
+        /// Om det inte gick uppdatera litteraturen returneras StatusCode = 500
+        /// </returns>
+        /// <response code="200">Skapandet av litteraturen gick bra</response>
+        /// <response code="400">ModelState isn't valid</response>
+        /// <response code="500">Det gick inte skapa litteraturen</response>
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost]
+        public async Task<ActionResult> PostLitteratur(CreateLitteraturDto dto)
+        {
+            if (dto == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+                Litteratur litteratur = m_Mapper.Map<Litteratur>(dto);
+                await m_Uow.KurslitteraturRepository.PostLitteraturAsync(litteratur);
+                bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
+
+                if (!bSaveOk)
+                    return StatusCode(500);
+            }
+            catch(Exception exc)
+            {
+                return StatusCode(500);
+            }
+
+            return Ok();
+        }
+
+        #endregion // End of region Action för att ladda upp kurslitteratur
+
+        #region Action för att uppdatera information om litteratur
+
+        /// <summary>
+        /// PUT: api/KursLitteratur/5
+        /// Put, update/replace, litteratur
+        /// </summary>
+        /// <param name="id">id för litteratur som skall uppdateras</param>
+        /// <param name="dto">Information om litteraturen som skall uppdateras</param>
+        /// <returns>Om det gick bra returneras Ok = 200. 
+        /// Om id och CreateLitteraturDto ej har samma id returneras BadRequest = 400. 
+        /// Om ModelState ej är valid returneras BadRequest = 400.
+        /// Om litteraturen som skall uppdateras inte finns returneras NotFound = 404.
+        /// Om det inte gick uppdatera litteraturen returneras StatusCode = 500
+        /// </returns>
+        /// <response code="200">Uppdatering av litteraturen gick bra</response>
+        /// <response code="400">Id och litteraturen id är inte samma eller ModelState isn't valid</response>
+        /// <response code="404">Litteraturen som skall uppdateras finns ej</response>
+        /// <response code="500">Det gick inte uppdatera informationen om litteraturen</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut("PutLitteraturAsync/{id}")]
+        public async Task<IActionResult> PutLitteraturAsync(int id, EditLitteraturDto dto)
+        {
+            if (id != dto.LitteraturId)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if(dto == null)
+                return BadRequest();
+
+            try
+            {
+                // Map EditLitteraturDto till Litteratur
+                Litteratur litteratur = m_Mapper.Map<Litteratur>(dto);
+
+                m_Uow.KurslitteraturRepository.PutLitteratur(litteratur);
+                bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
+
+                if (!bSaveOk)
+                    return StatusCode(500);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                bool bCourseExists = await m_Uow.KurslitteraturRepository.LitteraturExistsAsync(id);
+                if (!bCourseExists)
+                    return NotFound();
+                else
+                    throw;
+            }
+
+            return Ok();
+        }
+
+        #endregion // End of region Action för att uppdatera information om litteratur
+
+        #region Action för att skapa och uppdatera författare
+
+        /// <summary>
+        /// Async metod som skapar ny författare
+        /// </summary>
+        /// <param name="dto">CreateForfattareDto med information om forfattaren</param>
+        /// <returns>Om det gick bra returneras Ok = 200.
+        /// Om ModelState ej är valid returneras BadRequest = 400.
+        /// Om det inte gick uppdatera forfattaren returneras StatusCode = 500
+        /// </returns>
+        /// <response code="200">Skapandet av forfattaren gick bra</response>
+        /// <response code="400">ModelState isn't valid</response>
+        /// <response code="500">Det gick inte skapa forfattaren</response>
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("PostForfattare")]
+        public async Task<ActionResult> PostForfattare(CreateForfattareDto dto)
+        {
+            if (dto == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+                Forfattare forfattare = m_Mapper.Map<Forfattare>(dto);
+                await m_Uow.KurslitteraturRepository.PostForfattareAsync(forfattare);
+                bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
+
+                if (!bSaveOk)
+                    return StatusCode(500);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(500);
+            }
+
+            return Ok();
+        }
+
+
+        /// <summary>
+        /// PUT: api/KursLitteratur/5
+        /// Put, update/replace, forfattare
+        /// </summary>
+        /// <param name="id">id för forfattaren som skall uppdateras</param>
+        /// <param name="dto">Information om forfattaren som skall uppdateras</param>
+        /// <returns>Om det gick bra returneras Ok = 200. 
+        /// Om id och EditForfattareDto ej har samma id returneras BadRequest = 400. 
+        /// Om ModelState ej är valid returneras BadRequest = 400.
+        /// Om forfattaren som skall uppdateras inte finns returneras NotFound = 404.
+        /// Om det inte gick uppdatera författaren returneras StatusCode = 500
+        /// </returns>
+        /// <response code="200">Uppdatering av forfattaren gick bra</response>
+        /// <response code="400">Id och forfattare id är inte samma eller ModelState isn't valid</response>
+        /// <response code="404">forfattaren som skall uppdateras finns ej</response>
+        /// <response code="500">Det gick inte uppdatera informationen om forfattaren</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut("PutForfattareAsync/{id}")]
+        public async Task<IActionResult> PutForfattareAsync(int id, EditForfattareDto dto)
+        {
+            if (id != dto.ForfatterId)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (dto == null)
+                return BadRequest();
+
+            try
+            {
+                // Map EditForfattareDto till Forfattare
+                Forfattare forfattare = m_Mapper.Map<Forfattare>(dto);
+
+                m_Uow.KurslitteraturRepository.PutForfattare(forfattare);
+                bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
+
+                if (!bSaveOk)
+                    return StatusCode(500);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                bool bCourseExists = await m_Uow.KurslitteraturRepository.ForfattareExistsAsync(id);
+                if (!bCourseExists)
+                    return NotFound();
+                else
+                    throw;
+            }
+
+            return Ok();
+        }
+
+        #endregion // End region Action för att skapa och uppdatera författare
+
 
         //[HttpGet]
         //public IEnumerable<string> Get()

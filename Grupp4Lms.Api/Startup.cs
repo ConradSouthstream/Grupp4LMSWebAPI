@@ -36,7 +36,6 @@ namespace Grupp4Lms.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Grupp4Lms.Api", Version = "v1" });
 
-
                 // Grupp4Lms.Api.xml
                 // Grupp4Lms.Core.xml
                 // Grupp4Lms.Data.xml

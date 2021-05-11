@@ -1,4 +1,5 @@
 ﻿using Grupp4Lms.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -83,9 +84,54 @@ namespace Grupp4Lms.Core.IRepositories
         Task<IEnumerable<Litteratur>> SearchLitteraturInklusiveForfattareAsyn(string strTitel, string strForfattare, int iAmne);
 
         /// <summary>
+        /// Async metod som sparar en ny litteratur, inklusive författare i databasen. Det behöver inte finnas några författare
+        /// </summary>
+        /// <param name="litteratur">Den nya litteraturen som även kan innehålla författare</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        Task PostLitteraturAsync(Litteratur litteratur);
+
+        /// <summary>
+        /// Metod som uppdaterar information om litteratur
+        /// </summary>
+        /// <param name="litteratur">Litteratur som vi skall uppdatera</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        void PutLitteratur(Litteratur litteratur);
+
+        /// <summary>
+        /// Async metod som kontrollerar om litteraturen finns
+        /// </summary>
+        /// <param name="id">Id för litteraturen som vi söker</param>
+        /// <returns>true om sökt literatur finns. Annars returneras false</returns>
+        Task<bool> LitteraturExistsAsync(int id);
+
+        /// <summary>
+        /// Metod som uppdaterar information om en författare
+        /// </summary>
+        /// <param name="forfattare">Författare som skall uppdateras</param>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        void PutForfattare(Forfattare forfattare);
+
+        /// <summary>
+        /// Async metod som skapa ett nytt forfattare objekt i repository
+        /// </summary>
+        /// <param name="forfattare">Den nya författaren</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        Task PostForfattareAsync(Forfattare forfattare);
+
+        /// <summary>
+        /// Async metod som kontrollerar om författaren finns
+        /// </summary>
+        /// <param name="id">Id för författaren som vi söker</param>
+        /// <returns>true om sökt literatur finns. Annars returneras false</returns>
+        Task<bool> ForfattareExistsAsync(int id);
+
+        /// <summary>
         /// Async metod som sparar ändringar
         /// </summary>
         /// <returns>true om några ändringar sparas. Annars returneras false</returns>
-        Task<bool> SaveAsync();        
+        Task<bool> SaveAsync();
     }
 }
