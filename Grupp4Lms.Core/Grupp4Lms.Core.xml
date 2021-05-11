@@ -39,9 +39,9 @@
             Författarens efternamn
             </summary>
         </member>
-        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.FodelseDatum">
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.Age">
             <summary>
-            Författarens födelsedatum
+            Författarens ålder
             </summary>
         </member>
         <member name="T:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto">
@@ -64,9 +64,9 @@
             Författarens efternamn
             </summary>
         </member>
-        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.FodelseDatum">
+        <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.Age">
             <summary>
-            Författarens födelsedatum
+            Författarens ålder
             </summary>
         </member>
         <member name="P:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto.Litteratur">
@@ -330,7 +330,42 @@
             <summary>
             Async metod som returnerar alla ämnen
             </summary>
-            <returns>IEnumerable med alla ämnen</returns>
+            <returns>Task IEnumerable med alla ämnen</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetForfattareAsync">
+            <summary>
+            Async metod som returnerar alla författare
+            </summary>
+            <returns>Task IEnumerable med författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetForfattareAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar sökt författare
+            </summary>
+            <param name="id">Id för sökt författare</param>
+            <returns>Task med sökt författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetForfattareInklusiveLitteraturAsync">
+            <summary>
+            Async metod som returnerar alla författare inklusive litteratur som författaren har varit med och skrivit
+            </summary>
+            <returns>Task IEnumerable med författare inklusive litteratur som författaren har varit med och skrivit</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.GetForfattareInklusiveLitteraturAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar en sökt författare inklusive litteratur som författaren har varit med och skrivit
+            </summary>
+            <param name="id">id för sökt författare</param>
+            <returns>Task med sökt författare inklusive litteratur som författaren har varit med och skrivit</returns>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SearchLitteraturInklusiveForfattareAsyn(System.String,System.String,System.Int32)">
+            <summary>
+            Async metod som söker efter litteratur som matchar de olika sökt pararmetrarna
+            </summary>
+            <param name="strTitel">Titel som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="strForfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="iAmne">Id för ämne som vi vill söka på. Default är -1 och då söker vi inte på ämne</param>
+            <returns>Task IEnumerable med Litteratur inklusive författare</returns>
         </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SaveAsync">
             <summary>
@@ -353,6 +388,18 @@
             Async metod som skall spara uppdaterad data i repositories
             </summary>
             <returns>Task</returns>
+        </member>
+        <member name="T:Grupp4Lms.Core.IRepositories.Utils.ForfattareHelper">
+            <summary>
+            Klass med olika hjälp metoder för författare
+            </summary>
+        </member>
+        <member name="M:Grupp4Lms.Core.IRepositories.Utils.ForfattareHelper.CalculateAge(System.DateTime)">
+            <summary>
+            Static metod som beräknar ålder från ett födelsedatum
+            </summary>
+            <param name="dtDateOfBirth">Födelsedatum</param>
+            <returns>Ålder</returns>
         </member>
     </members>
 </doc>

@@ -23,8 +23,8 @@ namespace Grupp4Lms.Core.Dto
         public string EfterNamn { get; set; }
 
         /// <summary>
-        /// Författarens födelsedatum
+        /// Författarens ålder
         /// </summary>
-        public DateTime FodelseDatum { get; set; }
+        public int Age { get; set; }
     }
 }

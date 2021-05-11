@@ -4,6 +4,7 @@ using Grupp4Lms.Core.Entities;
 using Grupp4Lms.Core.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -108,7 +109,6 @@ namespace Grupp4Lms.Api.Controllers
         /// <returns>Ok=200 och en lista med litteratur exklusive forfattare</returns>
         /// <response code="200">Returnerade lista med LitteraturDto objekt</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LitteraturDto))]
-        //[Route("GetLitteraturen")]
         [HttpGet("GetLitteraturen")]
         public async Task<ActionResult<IEnumerable<LitteraturDto>>> GetLitteraturen()
         {
@@ -144,7 +144,6 @@ namespace Grupp4Lms.Api.Controllers
         /// <response code="404">Hittade inte sökt litteratur</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LitteraturDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[Route("GetLitteratur")]
         [HttpGet("GetLitteratur/{id}")]
         public async Task<ActionResult<LitteraturDto>> GetLitteratur(int id)
         {
@@ -172,7 +171,6 @@ namespace Grupp4Lms.Api.Controllers
         /// <returns>Ok=200 och en lista med litteratur inklusive forfattare</returns>
         /// <response code="200">Returnerade lista med LitteraturInklusiveForfattareDto objekt</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LitteraturInklusiveForfattareDto))]
-        //[Route("GetLitteraturenInklusiveForfattare")]
         [HttpGet("GetLitteraturenInklusiveForfattare")]
         public async Task<ActionResult<IEnumerable<LitteraturInklusiveForfattareDto>>> GetLitteraturenInklusiveForfattare()
         {
@@ -208,7 +206,6 @@ namespace Grupp4Lms.Api.Controllers
         /// <response code="404">Hittade inte sökt litteratur</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LitteraturInklusiveForfattareDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[Route("GetLitteraturInklusiveForfattare")]
         [HttpGet("GetLitteraturInklusiveForfattare/{id}")]
         public async Task<ActionResult<LitteraturInklusiveForfattareDto>> GetLitteraturInklusiveForfattare(int id)
         {
@@ -226,7 +223,180 @@ namespace Grupp4Lms.Api.Controllers
 
         #endregion  // End of region Action för att hämta litteratur inklusive författare
 
+        #region Action för att hämta författare
 
+        // GET api/<KurslitteraturController>/GetForfattare
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetForfattare
+        /// Async metod som returnerar författarna
+        /// </summary>
+        /// <returns>Ok=200 och en lista med författare</returns>
+        /// <response code="200">Returnerade lista med författare som  ForfattareDto objekt</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ForfattareDto))]
+        [HttpGet("GetForfattare")]
+        public async Task<ActionResult<IEnumerable<ForfattareDto>>> GetForfattare()
+        {
+            List<ForfattareDto> lsForfattare = null;
+            ForfattareDto dto = null;
+
+            // Hämta författare
+            var forfattare = await m_Uow.KurslitteraturRepository.GetForfattareAsync();
+            if(forfattare != null && forfattare.Count() > 0)
+            {
+                // Map forfattare till ForfattareDto
+                lsForfattare = new List<ForfattareDto>(forfattare.Count());
+                foreach(Forfattare fe in forfattare)
+                {
+                    dto = m_Mapper.Map<ForfattareDto>(fe);
+                    if (dto != null)
+                        lsForfattare.Add(dto);
+                }
+            }
+
+            return Ok(lsForfattare);
+        }
+
+        // GET api/<KurslitteraturController>/GetForfattare/1
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetForfattare/1
+        /// Async metod som returnerar sökt författare
+        /// </summary>
+        /// <param name="id">id för sökt författare</param>
+        /// <returns>Ok=200 och sökt författare</returns>
+        /// <response code="200">Returnerar sökt författare som ForfattareDto objekt</response>
+        /// <response code="404">Hittade inte sökt litteratur</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ForfattareDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("GetForfattare/{id}")]
+        public async Task<ActionResult<ForfattareDto>> GetForfattare(int id)
+        {
+            // Hämta författare 
+            var forfattare = await m_Uow.KurslitteraturRepository.GetForfattareAsync(id);
+
+            if (forfattare == null)
+                return NotFound();
+
+            // Map författare till ForfattareDto
+            ForfattareDto dto = m_Mapper.Map<ForfattareDto>(forfattare);
+
+            return Ok(dto);
+        }
+
+
+        #endregion // End of region Action för att hämta författare
+
+        #region Action för att hämta författare inklusive litteratur
+
+
+        // GET api/<KurslitteraturController>/GetForfattareInklusiveLitteratur
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetForfattareInklusiveLitteratur
+        /// Async metod som returnerar författarna inklusive litteratur som författaren har varit med och skrivit
+        /// </summary>
+        /// <returns>Ok=200 och en lista med författare inklusive litteratur som författaren har varit med och skrivit</returns>
+        /// <response code="200">Returnerade lista med författare inklusive litteratur som författaren har varit med och skrivit som ForfattareInklusiveLitteraturDto objekt</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ForfattareInklusiveLitteraturDto))]
+        [HttpGet("GetForfattareInklusiveLitteratur")]
+        public async Task<ActionResult<IEnumerable<ForfattareInklusiveLitteraturDto>>> GetForfattareInklusiveLitteratur()
+        {
+            List<ForfattareInklusiveLitteraturDto> lsForfattare = null;
+            ForfattareInklusiveLitteraturDto dto = null;
+
+            // Hämta författare
+            var forfattare = await m_Uow.KurslitteraturRepository.GetForfattareInklusiveLitteraturAsync();
+            if (forfattare != null && forfattare.Count() > 0)
+            {
+                // Map forfattare till ForfattareInklusiveLitteraturDto
+                lsForfattare = new List<ForfattareInklusiveLitteraturDto>(forfattare.Count());
+                foreach (Forfattare fe in forfattare)
+                {
+                    dto = m_Mapper.Map<ForfattareInklusiveLitteraturDto>(fe);
+                    if (dto != null)
+                        lsForfattare.Add(dto);
+                }
+            }
+
+            return Ok(lsForfattare);
+        }
+
+
+        // GET api/<KurslitteraturController>/GetForfattareInkusiveLitteratur/1
+        /// <summary>
+        /// GET: api/KurslitteraturController/GetForfattareInkusiveLitteratur/1
+        /// Async metod som returnerar sökt författare inklusive den litteratur som författaren har skrivit
+        /// </summary>
+        /// <param name="id">id för sökt författare</param>
+        /// <returns>Ok=200 och sökt författare inklusive den litteratur som författaren har skrivit</returns>
+        /// <response code="200">Returnerade sökt författare inklusive den litteratur som författaren har skrivit som ForfattareInklusiveLitteraturDto objekt</response>
+        /// <response code="404">Hittade inte sökt litteratur</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ForfattareInklusiveLitteraturDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("GetForfattareInkusiveLitteratur/{id}")]
+        public async Task<ActionResult<ForfattareInklusiveLitteraturDto>> GetForfattareInkusiveLitteratur(int id)
+        {
+            // Hämta författare inklusive litteratur som författaren har skrivit
+            var forfattare = await m_Uow.KurslitteraturRepository.GetForfattareInklusiveLitteraturAsync(id);
+
+            if (forfattare == null)
+                return NotFound();
+
+            // Map författare till ForfattareInklusiveLitteraturDto
+            ForfattareInklusiveLitteraturDto dto = m_Mapper.Map<ForfattareInklusiveLitteraturDto>(forfattare);
+
+            return Ok(dto);
+        }
+
+
+        #endregion // End of region Action för att hämta författare inklusive litteratur
+
+        #region Action för sökning av kurslitteratur        
+
+        /// <summary>
+        /// Async metod som returnerar IEnumerable med Litteratur inklusive författare som matchar sökningen
+        /// </summary>
+        /// <param name="titel">Titel som vi vill söka på. Kan vara null eller empty string</param>
+        /// <param name="forfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+        /// <param name="amne">Id för ämne som vi vill söka på. Kan vara 0 eller -1 och då söker vi inte på ämne</param>
+        /// <returns>Ok=200 och IEnumerable med litteratur inklusive författare som matchar sökningen</returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LitteraturInklusiveForfattareDto))]
+        [HttpGet("SearchLitteratur")]
+        public async Task<ActionResult<IEnumerable<LitteraturInklusiveForfattareDto>>>SearchLitteratur(string titel, string forfattare, int? amne)
+        {// titel, författare eller ämnesområde
+            List<LitteraturInklusiveForfattareDto> lsLitteratur = null;
+            LitteraturInklusiveForfattareDto dto = null;
+
+            string strTitel = String.Empty;
+            string strForfattare = String.Empty;
+            int iAmne = -1;
+
+            // Börja med att rensa upp indata
+            if (!String.IsNullOrWhiteSpace(titel))
+                strTitel = titel.Trim();
+
+            if (!String.IsNullOrWhiteSpace(forfattare))
+                strForfattare = forfattare.Trim();
+
+            if (amne.HasValue)
+                iAmne = amne.Value;
+
+            // Sök efter litteratur som matchar olika parametrar som användaren vill söka på
+            var litteratur = await m_Uow.KurslitteraturRepository.SearchLitteraturInklusiveForfattareAsyn(strTitel, strForfattare, iAmne);
+            if(litteratur != null && litteratur.Count() > 0)
+            {
+                // Map från litteratur till LitteraturInklusiveForfattareDto objekt
+                lsLitteratur = new List<LitteraturInklusiveForfattareDto>(litteratur.Count());
+                foreach(Litteratur lr in litteratur)
+                {
+                    dto = m_Mapper.Map<LitteraturInklusiveForfattareDto>(lr);
+                    if(dto != null)
+                        lsLitteratur.Add(dto);
+                }
+            }
+
+            return Ok(lsLitteratur);
+        }
+
+        #endregion // End of region Action för sökning av kurslitteratur
 
         //[HttpGet]
         //public IEnumerable<string> Get()

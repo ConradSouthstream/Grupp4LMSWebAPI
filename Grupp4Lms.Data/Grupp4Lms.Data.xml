@@ -98,6 +98,41 @@
             </summary>
             <returns>IEnumerable med alla ämnen</returns>
         </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetForfattareAsync">
+            <summary>
+            Async metod som returnerar alla författare
+            </summary>
+            <returns>IEnumerable med författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetForfattareAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar sökt författare
+            </summary>
+            <param name="id">Id för sökt författare</param>
+            <returns>Task med sökt författare</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetForfattareInklusiveLitteraturAsync">
+            <summary>
+            Async metod som returnerar alla författare inklusive litteratur som författaren har varit med och skrivit
+            </summary>
+            <returns>IEnumerable med författare inklusive litteratur som författaren har varit med och skrivit</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.GetForfattareInklusiveLitteraturAsync(System.Int32)">
+            <summary>
+            Async metod som returnerar en sökt författare inklusive litteratur som författaren har varit med och skrivit
+            </summary>
+            <param name="id">id för sökt författare</param>
+            <returns>Task med sökt författare inklusive litteratur som författaren har varit med och skrivit</returns>
+        </member>
+        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SearchLitteraturInklusiveForfattareAsyn(System.String,System.String,System.Int32)">
+            <summary>
+            Async metod som söker efter litteratur som matchar de olika sökt pararmetrarna
+            </summary>
+            <param name="strTitel">Titel som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="strForfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="iAmne">Id för ämne som vi vill söka på. Default är -1 och då söker vi inte på ämne</param>
+            <returns>Task IEnumerable med Litteratur inklusive författare</returns>
+        </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SaveAsync">
             <summary>
             Async metod som sparar ändringar

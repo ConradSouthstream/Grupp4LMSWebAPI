@@ -68,5 +68,50 @@
             <response code="200">Returnerade sökt litteratur som ett LitteraturInklusiveForfattareDto objekt</response>
             <response code="404">Hittade inte sökt litteratur</response>
         </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetForfattare">
+            <summary>
+            GET: api/KurslitteraturController/GetForfattare
+            Async metod som returnerar författarna
+            </summary>
+            <returns>Ok=200 och en lista med författare</returns>
+            <response code="200">Returnerade lista med författare som  ForfattareDto objekt</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetForfattare(System.Int32)">
+            <summary>
+            GET: api/KurslitteraturController/GetForfattare/1
+            Async metod som returnerar sökt författare
+            </summary>
+            <param name="id">id för sökt författare</param>
+            <returns>Ok=200 och sökt författare</returns>
+            <response code="200">Returnerar sökt författare som ForfattareDto objekt</response>
+            <response code="404">Hittade inte sökt litteratur</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetForfattareInklusiveLitteratur">
+            <summary>
+            GET: api/KurslitteraturController/GetForfattareInklusiveLitteratur
+            Async metod som returnerar författarna inklusive litteratur som författaren har varit med och skrivit
+            </summary>
+            <returns>Ok=200 och en lista med författare inklusive litteratur som författaren har varit med och skrivit</returns>
+            <response code="200">Returnerade lista med författare inklusive litteratur som författaren har varit med och skrivit som ForfattareInklusiveLitteraturDto objekt</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.GetForfattareInkusiveLitteratur(System.Int32)">
+            <summary>
+            GET: api/KurslitteraturController/GetForfattareInkusiveLitteratur/1
+            Async metod som returnerar sökt författare inklusive den litteratur som författaren har skrivit
+            </summary>
+            <param name="id">id för sökt författare</param>
+            <returns>Ok=200 och sökt författare inklusive den litteratur som författaren har skrivit</returns>
+            <response code="200">Returnerade sökt författare inklusive den litteratur som författaren har skrivit som ForfattareInklusiveLitteraturDto objekt</response>
+            <response code="404">Hittade inte sökt litteratur</response>
+        </member>
+        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.SearchLitteratur(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Async metod som returnerar IEnumerable med Litteratur inklusive författare som matchar sökningen
+            </summary>
+            <param name="titel">Titel som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="forfattare">Namn på författaren som vi vill söka på. Kan vara null eller empty string</param>
+            <param name="amne">Id för ämne som vi vill söka på. Kan vara 0 eller -1 och då söker vi inte på ämne</param>
+            <returns>Ok=200 och IEnumerable med litteratur inklusive författare som matchar sökningen</returns>
+        </member>
     </members>
 </doc>

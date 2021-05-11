@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Grupp4Lms.Core.Dto;
 using Grupp4Lms.Core.Entities;
+using Grupp4Lms.Core.IRepositories.Utils;
 
 namespace Grupp4Lms.Data.MapperProfiles
 {
@@ -36,9 +37,11 @@ namespace Grupp4Lms.Data.MapperProfiles
         /// </summary>
         private void ForfattareMap()
         {
-            CreateMap<Forfattare, ForfattareDto>();
+            CreateMap<Forfattare, ForfattareDto>()
+                .ForMember(dest => dest.Age, from => from.MapFrom(fd => ForfattareHelper.CalculateAge(fd.FodelseDatum)));
 
-            CreateMap<Forfattare, ForfattareInklusiveLitteraturDto>();
+            CreateMap<Forfattare, ForfattareInklusiveLitteraturDto>()
+                .ForMember(dest => dest.Age, from => from.MapFrom(fd => ForfattareHelper.CalculateAge(fd.FodelseDatum)));
         }
 
 
