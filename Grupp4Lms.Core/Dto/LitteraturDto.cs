@@ -38,8 +38,18 @@ namespace Grupp4Lms.Core.Dto
         public string Amne { get; set; }
 
         /// <summary>
+        /// Id för ämne
+        /// </summary>
+        public int AmneId { get; set; }
+
+        /// <summary>
         /// Litteraturens nivå
         /// </summary>
         public string Niva { get; set; }
+
+        /// <summary>
+        /// Id för nivån
+        /// </summary>
+        public int NivaId { get; set; }
     }
 }

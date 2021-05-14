@@ -234,9 +234,19 @@
             Litteraturens ämens kategori
             </summary>
         </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.AmneId">
+            <summary>
+            Id för ämne
+            </summary>
+        </member>
         <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.Niva">
             <summary>
             Litteraturens nivå
+            </summary>
+        </member>
+        <member name="P:Grupp4Lms.Core.Dto.LitteraturDto.NivaId">
+            <summary>
+            Id för nivån
             </summary>
         </member>
         <member name="T:Grupp4Lms.Core.Dto.LitteraturInklusiveForfattareDto">
