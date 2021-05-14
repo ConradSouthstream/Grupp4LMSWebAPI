@@ -149,14 +149,6 @@
             <returns>void</returns>
             <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
         </member>
-        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.DeleteLitteraturAsync(Grupp4Lms.Core.Entities.Litteratur)">
-            <summary>
-            Async metod som raderar litteratur
-            </summary>
-            <param name="litteratur">litteratur som skall raderas</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
-        </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.LitteraturExistsAsync(System.Int32)">
             <summary>
             Async metod som kontrollerar om litteraturen finns
@@ -179,30 +171,12 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
         </member>
-        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.PostForfattareKopplaTillLitteraturAsync(Grupp4Lms.Core.Entities.Forfattare)">
-            <summary>
-            Async metod som skapa ett nytt forfattare objekt i repository
-            Kopplar författaren till litetraturen. Id för litteraturen måste finnas i propertien LitteraturId
-            Om LitteraturId inte är större än o kommer författaren skapas utan koppling till en litteratur
-            </summary>
-            <param name="forfattare">Den nya författaren</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
-        </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.ForfattareExistsAsync(System.Int32)">
             <summary>
             Async metod som kontrollerar om författaren finns
             </summary>
             <param name="id">Id för författaren som vi söker</param>
             <returns>true om sökt literatur finns. Annars returneras false</returns>
-        </member>
-        <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.DeleteForfattareAsync(Grupp4Lms.Core.Entities.Forfattare)">
-            <summary>
-            Async metod som raderar en författare
-            </summary>
-            <param name="forfattare">författare som skall raderas</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
         </member>
         <member name="M:Grupp4Lms.Data.Repositories.KurslitteraturRepository.SaveAsync">
             <summary>

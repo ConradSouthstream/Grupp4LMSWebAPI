@@ -225,16 +225,6 @@ namespace Grupp4Lms.Api.Controllers
             // Map litteratur till LitteraturInklusiveForfattareDto
             LitteraturInklusiveForfattareDto dto = m_Mapper.Map<LitteraturInklusiveForfattareDto>(litteratur);
 
-            // Ett litet hack för att få med LitteraturId
-            if (dto != null)
-            {
-                if(dto.Forfattare != null && dto.Forfattare.Count() > 0)
-                {
-                    foreach(var fe in dto.Forfattare)
-                        fe.LitteraturId = litteratur.LitteraturId;
-                }
-            }
-
             return Ok(dto);
         }
 
@@ -415,8 +405,7 @@ namespace Grupp4Lms.Api.Controllers
 
         #endregion // End of region Action för sökning av kurslitteratur
 
-
-        #region Action för att skapa, uppdatera och radera litteratur
+        #region Action för att skapa och uppdatera litteratur
 
         /// <summary>
         /// Async metod som skapar ny litteratur
@@ -449,7 +438,7 @@ namespace Grupp4Lms.Api.Controllers
                 if (!bSaveOk)
                     return StatusCode(500);
             }
-            catch (Exception exc)
+            catch(Exception exc)
             {
                 return StatusCode(500);
             }
@@ -457,6 +446,9 @@ namespace Grupp4Lms.Api.Controllers
             return Ok();
         }
 
+        #endregion // End of region Action för att ladda upp kurslitteratur
+
+        #region Action för att uppdatera information om litteratur
 
         /// <summary>
         /// PUT: api/KursLitteratur/5
@@ -513,37 +505,9 @@ namespace Grupp4Lms.Api.Controllers
             return Ok();
         }
 
+        #endregion // End of region Action för att uppdatera information om litteratur
 
-        /// <summary>
-        /// Async metod som raderar en litteraturen
-        /// </summary>
-        /// <param name="id">id för sökt litteraturen</param>
-        /// <returns>Ok=200</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="404">Hittade inte sökt litteraturen</response>
-        /// <response code="500">Det gick inte radera litteraturen</response>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpDelete("DeleteLitteraturAsync/{id}")]
-        public async Task<ActionResult> DeleteLitteraturAsync(int id)
-        {
-            var litteratur = await m_Uow.KurslitteraturRepository.GetLitteraturInklusiveForfattareAsync(id);
-            if (litteratur == null)
-                return NotFound();
-
-            await m_Uow.KurslitteraturRepository.DeleteLitteraturAsync(litteratur);
-            bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
-
-            if (!bSaveOk)
-                return StatusCode(500);
-
-            return Ok();
-        }
-
-        #endregion // End of region Action för att skapa, uppdatera och radera litteratur
-
-        #region Action för att skapa, uppdatera och radera en författare
+        #region Action för att skapa och uppdatera författare
 
         /// <summary>
         /// Async metod som skapar ny författare
@@ -571,48 +535,6 @@ namespace Grupp4Lms.Api.Controllers
             {
                 Forfattare forfattare = m_Mapper.Map<Forfattare>(dto);
                 await m_Uow.KurslitteraturRepository.PostForfattareAsync(forfattare);
-                bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
-
-                if (!bSaveOk)
-                    return StatusCode(500);
-            }
-            catch (Exception exc)
-            {
-                return StatusCode(500);
-            }
-
-            return Ok();
-        }
-
-
-        /// <summary>
-        /// Async metod som skapar ny författare. Kopplar författaren till litteratur
-        /// Id för litteraturen måste finnas i LitteraturId
-        /// Om LitteraturId inte är större än 0 kommer författern skapas utan koppling till litteratur
-        /// </summary>
-        /// <param name="dto">CreateForfattareDto med information om forfattaren</param>
-        /// <returns>Om det gick bra returneras Ok = 200.
-        /// Om ModelState ej är valid returneras BadRequest = 400.
-        /// Om det inte gick uppdatera forfattaren returneras StatusCode = 500
-        /// </returns>
-        /// <response code="200">Skapandet av forfattaren gick bra</response>
-        /// <response code="400">ModelState isn't valid</response>
-        /// <response code="500">Det gick inte skapa forfattaren</response>
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("PostForfattareKopplaTillLitteratur")]
-        public async Task<ActionResult> PostForfattareKopplaTillLitteratur(CreateForfattareDto dto)
-        {
-            if (dto == null)
-                return BadRequest();
-
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            try
-            {
-                Forfattare forfattare = m_Mapper.Map<Forfattare>(dto);
-                await m_Uow.KurslitteraturRepository.PostForfattareKopplaTillLitteraturAsync(forfattare);
                 bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
 
                 if (!bSaveOk)
@@ -682,36 +604,8 @@ namespace Grupp4Lms.Api.Controllers
             return Ok();
         }
 
+        #endregion // End region Action för att skapa och uppdatera författare
 
-        /// <summary>
-        /// Async metod som raderar en författare
-        /// </summary>
-        /// <param name="id">id för sökt författare</param>
-        /// <returns>Ok=200</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="404">Hittade inte sökt författare</response>
-        /// <response code="500">Det gick inte radera forfattaren</response>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpDelete("DeleteForfattareAsync/{id}")]
-        public async Task<ActionResult> DeleteForfattareAsync(int id)
-        {
-            var forfattare = await m_Uow.KurslitteraturRepository.GetForfattareAsync(id);
-            if (forfattare == null)
-                return NotFound();
-
-            await m_Uow.KurslitteraturRepository.DeleteForfattareAsync(forfattare);
-            bool bSaveOk = await m_Uow.KurslitteraturRepository.SaveAsync();
-
-            if (!bSaveOk)
-                return StatusCode(500);
-
-            return Ok();
-        }
-
-        #endregion // End region Action för att skapa, uppdatera och radera en författare
-        
 
         //[HttpGet]
         //public IEnumerable<string> Get()

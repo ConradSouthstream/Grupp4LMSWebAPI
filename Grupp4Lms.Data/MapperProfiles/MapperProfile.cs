@@ -57,15 +57,11 @@ namespace Grupp4Lms.Data.MapperProfiles
         {
             CreateMap<Litteratur, LitteraturDto>()
                 .ForMember(dest => dest.Amne, from => from.MapFrom(a => a.Amne.Namn))
-                .ForMember(dest => dest.Niva, from => from.MapFrom(n => n.Niva.Namn))
-                .ForMember(dest => dest.AmneId, from => from.MapFrom(a => a.Amne.AmneId))
-                .ForMember(dest => dest.NivaId, from => from.MapFrom(n => n.Niva.NivaId));
+                .ForMember(dest => dest.Niva, from => from.MapFrom(n => n.Niva.Namn));
 
             CreateMap<Litteratur, LitteraturInklusiveForfattareDto>()
                 .ForMember(dest => dest.Amne, from => from.MapFrom(a => a.Amne.Namn))
-                .ForMember(dest => dest.Niva, from => from.MapFrom(n => n.Niva.Namn))
-                .ForMember(dest => dest.AmneId, from => from.MapFrom(a => a.Amne.AmneId))
-                .ForMember(dest => dest.NivaId, from => from.MapFrom(n => n.Niva.NivaId));
+                .ForMember(dest => dest.Niva, from => from.MapFrom(n => n.Niva.Namn));
 
             CreateMap<CreateLitteraturDto, Litteratur>();
 
