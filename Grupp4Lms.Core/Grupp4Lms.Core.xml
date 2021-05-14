@@ -39,12 +39,6 @@
             Författarens födelsedatum
             </summary>
         </member>
-        <member name="P:Grupp4Lms.Core.Dto.CreateForfattareDto.LitteraturId">
-            <summary>
-            Id för den litteratur som författaren skall kopplas till vid edit, create och delete
-            Sätts av klienten
-            </summary>
-        </member>
         <member name="T:Grupp4Lms.Core.Dto.CreateLitteraturDto">
             <summary>
             Dto för att skapa litteratur
@@ -110,12 +104,6 @@
             Författarens födelsedatum
             </summary>
         </member>
-        <member name="P:Grupp4Lms.Core.Dto.EditForfattareDto.LitteraturId">
-            <summary>
-            Id för den litteratur som författaren skall kopplas till vid edit, create och delete
-            Sätts av klienten
-            </summary>
-        </member>
         <member name="T:Grupp4Lms.Core.Dto.EditLitteraturDto">
             <summary>
             Dto för att redigera litteratur
@@ -179,11 +167,6 @@
         <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.Age">
             <summary>
             Författarens ålder
-            </summary>
-        </member>
-        <member name="P:Grupp4Lms.Core.Dto.ForfattareDto.FodelseDatum">
-            <summary>
-            Författarens födelsedatum
             </summary>
         </member>
         <member name="T:Grupp4Lms.Core.Dto.ForfattareInklusiveLitteraturDto">
@@ -366,12 +349,6 @@
             Författarens födelsedatum
             </summary>
         </member>
-        <member name="P:Grupp4Lms.Core.Entities.Forfattare.LitteraturId">
-            <summary>
-            Id för den litteratur som författaren skall kopplas till vid edit, create och delete
-            Sätts av klienten
-            </summary>
-        </member>
         <member name="P:Grupp4Lms.Core.Entities.Forfattare.Litteratur">
             <summary>
             En författare kan har skrivit flera olika litterära verk
@@ -541,14 +518,6 @@
             <returns>Task</returns>
             <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
         </member>
-        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.DeleteLitteraturAsync(Grupp4Lms.Core.Entities.Litteratur)">
-            <summary>
-            Async metod som raderar litteratur
-            </summary>
-            <param name="litteratur">litteratur som skall raderas</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
-        </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.LitteraturExistsAsync(System.Int32)">
             <summary>
             Async metod som kontrollerar om litteraturen finns
@@ -568,17 +537,7 @@
             Async metod som skapa ett nytt forfattare objekt i repository
             </summary>
             <param name="forfattare">Den nya författaren</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
-        </member>
-        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.PostForfattareKopplaTillLitteraturAsync(Grupp4Lms.Core.Entities.Forfattare)">
-            <summary>
-            Async metod som skapa ett nytt forfattare objekt i repository
-            Kopplar författaren till litetraturen. Id för litteraturen måste finnas i propertien LitteraturId
-            Om LitteraturId inte är större än o kommer författaren skapas utan koppling till en litteratur
-            </summary>
-            <param name="forfattare">Den nya författaren</param>
-            <returns>Task</returns>
+            <returns></returns>
             <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
         </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.ForfattareExistsAsync(System.Int32)">
@@ -587,14 +546,6 @@
             </summary>
             <param name="id">Id för författaren som vi söker</param>
             <returns>true om sökt literatur finns. Annars returneras false</returns>
-        </member>
-        <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.DeleteForfattareAsync(Grupp4Lms.Core.Entities.Forfattare)">
-            <summary>
-            Async metod som raderar en författare
-            </summary>
-            <param name="forfattare">författare som skall raderas</param>
-            <returns>Task</returns>
-            <exception cref="T:System.ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
         </member>
         <member name="M:Grupp4Lms.Core.IRepositories.IKurslitteraturRepository.SaveAsync">
             <summary>
