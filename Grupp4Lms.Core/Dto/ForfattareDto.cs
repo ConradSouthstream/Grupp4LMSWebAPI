@@ -26,5 +26,12 @@ namespace Grupp4Lms.Core.Dto
         /// Författarens ålder
         /// </summary>
         public int Age { get; set; }
+
+        /// <summary>
+        /// Författarens födelsedatum
+        /// </summary>
+        public DateTime FodelseDatum { get; set; }
+
+        public int LitteraturId { get; set; }
     }
 }

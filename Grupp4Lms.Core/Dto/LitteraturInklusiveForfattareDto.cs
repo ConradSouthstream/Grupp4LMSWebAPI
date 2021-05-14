@@ -43,6 +43,10 @@ namespace Grupp4Lms.Core.Dto
         /// </summary>
         public string Niva { get; set; }
 
+        public int AmneId { get; set; }
+
+        public int NivaId { get; set; }
+
         /// <summary>
         /// Litteraturens författare
         /// </summary>

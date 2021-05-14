@@ -100,6 +100,14 @@ namespace Grupp4Lms.Core.IRepositories
         void PutLitteratur(Litteratur litteratur);
 
         /// <summary>
+        /// Async metod som raderar litteratur
+        /// </summary>
+        /// <param name="litteratur">litteratur som skall raderas</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
+        Task DeleteLitteraturAsync(Litteratur litteratur);
+
+        /// <summary>
         /// Async metod som kontrollerar om litteraturen finns
         /// </summary>
         /// <param name="id">Id för litteraturen som vi söker</param>
@@ -117,9 +125,19 @@ namespace Grupp4Lms.Core.IRepositories
         /// Async metod som skapa ett nytt forfattare objekt i repository
         /// </summary>
         /// <param name="forfattare">Den nya författaren</param>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
         Task PostForfattareAsync(Forfattare forfattare);
+
+        /// <summary>
+        /// Async metod som skapa ett nytt forfattare objekt i repository
+        /// Kopplar författaren till litetraturen. Id för litteraturen måste finnas i propertien LitteraturId
+        /// Om LitteraturId inte är större än o kommer författaren skapas utan koppling till en litteratur
+        /// </summary>
+        /// <param name="forfattare">Den nya författaren</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        Task PostForfattareKopplaTillLitteraturAsync(Forfattare forfattare);
 
         /// <summary>
         /// Async metod som kontrollerar om författaren finns
@@ -127,6 +145,14 @@ namespace Grupp4Lms.Core.IRepositories
         /// <param name="id">Id för författaren som vi söker</param>
         /// <returns>true om sökt literatur finns. Annars returneras false</returns>
         Task<bool> ForfattareExistsAsync(int id);
+
+        /// <summary>
+        /// Async metod som raderar en författare
+        /// </summary>
+        /// <param name="forfattare">författare som skall raderas</param>
+        /// <returns>Task</returns>
+        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
+        Task DeleteForfattareAsync(Forfattare forfattare);
 
         /// <summary>
         /// Async metod som sparar ändringar
