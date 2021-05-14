@@ -144,34 +144,9 @@
             <response code="404">Litteraturen som skall uppdateras finns ej</response>
             <response code="500">Det gick inte uppdatera informationen om litteraturen</response>
         </member>
-        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.DeleteLitteraturAsync(System.Int32)">
-            <summary>
-            Async metod som raderar en litteraturen
-            </summary>
-            <param name="id">id för sökt litteraturen</param>
-            <returns>Ok=200</returns>
-            <response code="200">Ok</response>
-            <response code="404">Hittade inte sökt litteraturen</response>
-            <response code="500">Det gick inte radera litteraturen</response>
-        </member>
         <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PostForfattare(Grupp4Lms.Core.Dto.CreateForfattareDto)">
             <summary>
             Async metod som skapar ny författare
-            </summary>
-            <param name="dto">CreateForfattareDto med information om forfattaren</param>
-            <returns>Om det gick bra returneras Ok = 200.
-            Om ModelState ej är valid returneras BadRequest = 400.
-            Om det inte gick uppdatera forfattaren returneras StatusCode = 500
-            </returns>
-            <response code="200">Skapandet av forfattaren gick bra</response>
-            <response code="400">ModelState isn't valid</response>
-            <response code="500">Det gick inte skapa forfattaren</response>
-        </member>
-        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.PostForfattareKopplaTillLitteratur(Grupp4Lms.Core.Dto.CreateForfattareDto)">
-            <summary>
-            Async metod som skapar ny författare. Kopplar författaren till litteratur
-            Id för litteraturen måste finnas i LitteraturId
-            Om LitteraturId inte är större än 0 kommer författern skapas utan koppling till litteratur
             </summary>
             <param name="dto">CreateForfattareDto med information om forfattaren</param>
             <returns>Om det gick bra returneras Ok = 200.
@@ -199,16 +174,6 @@
             <response code="400">Id och forfattare id är inte samma eller ModelState isn't valid</response>
             <response code="404">forfattaren som skall uppdateras finns ej</response>
             <response code="500">Det gick inte uppdatera informationen om forfattaren</response>
-        </member>
-        <member name="M:Grupp4Lms.Api.Controllers.KurslitteraturController.DeleteForfattareAsync(System.Int32)">
-            <summary>
-            Async metod som raderar en författare
-            </summary>
-            <param name="id">id för sökt författare</param>
-            <returns>Ok=200</returns>
-            <response code="200">Ok</response>
-            <response code="404">Hittade inte sökt författare</response>
-            <response code="500">Det gick inte radera forfattaren</response>
         </member>
     </members>
 </doc>

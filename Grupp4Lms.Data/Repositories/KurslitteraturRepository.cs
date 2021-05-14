@@ -339,23 +339,6 @@ namespace Grupp4Lms.Data.Repositories
             m_DbContext.Entry(litteratur).State = EntityState.Modified;
         }
 
-
-        /// <summary>
-        /// Async metod som raderar litteratur
-        /// </summary>
-        /// <param name="litteratur">litteratur som skall raderas</param>
-        /// <returns>Task</returns>
-        /// <exception cref="ArgumentNullException">Kastas om referensen till Litteratur objektet är null</exception>
-        public async Task DeleteLitteraturAsync(Litteratur litteratur)
-        {
-            if (litteratur is null)
-                throw new ArgumentNullException("KurslitteraturRepository. DeleteLitteraturAsync. Reference to Litteratur is null");
-
-            // TODO. Fungerar inte riktigt. Raderar inte författarna från databasen
-            m_DbContext.Litteratur.Remove(litteratur);
-        }
-
-
         /// <summary>
         /// Async metod som kontrollerar om litteraturen finns
         /// </summary>
@@ -403,37 +386,6 @@ namespace Grupp4Lms.Data.Repositories
 
 
         /// <summary>
-        /// Async metod som skapa ett nytt forfattare objekt i repository
-        /// Kopplar författaren till litetraturen. Id för litteraturen måste finnas i propertien LitteraturId
-        /// Om LitteraturId inte är större än o kommer författaren skapas utan koppling till en litteratur
-        /// </summary>
-        /// <param name="forfattare">Den nya författaren</param>
-        /// <returns>Task</returns>
-        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
-        public async Task PostForfattareKopplaTillLitteraturAsync(Forfattare forfattare)
-        {
-            if (forfattare is null)
-                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareAsync. Reference to forfattaren is null");
-
-            if (forfattare.LitteraturId > 0)
-            {
-                var litteratur = await m_DbContext.Litteratur.Where(l => l.LitteraturId == forfattare.LitteraturId).FirstOrDefaultAsync();
-                if (litteratur != null)
-                {
-                    litteratur.Forfattare = new List<Forfattare>(1);
-                    litteratur.Forfattare.Add(forfattare);
-
-                    //await m_DbContext.Forfattar.AddAsync(forfattare);
-                }
-            }
-            else
-            {
-                await PostForfattareAsync(forfattare);                
-            }
-        }
-
-
-        /// <summary>
         /// Async metod som kontrollerar om författaren finns
         /// </summary>
         /// <param name="id">Id för författaren som vi söker</param>
@@ -447,21 +399,6 @@ namespace Grupp4Lms.Data.Repositories
                 bForfattareExists = false;
 
             return bForfattareExists;
-        }
-
-
-        /// <summary>
-        /// Async metod som raderar en författare
-        /// </summary>
-        /// <param name="forfattare">författare som skall raderas</param>
-        /// <returns>Task</returns>
-        /// <exception cref="ArgumentNullException">Kastas om referensen till Forfattare objektet är null</exception>
-        public async Task DeleteForfattareAsync(Forfattare forfattare)
-        {
-            if (forfattare is null)
-                throw new ArgumentNullException("KurslitteraturRepository. DeleteForfattareAsync. Reference to forfattaren is null");
-
-            m_DbContext.Forfattar.Remove(forfattare);
         }
 
 
