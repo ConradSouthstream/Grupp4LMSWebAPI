@@ -351,7 +351,14 @@ namespace Grupp4Lms.Data.Repositories
             if (litteratur is null)
                 throw new ArgumentNullException("KurslitteraturRepository. DeleteLitteraturAsync. Reference to Litteratur is null");
 
-            // TODO. Fungerar inte riktigt. Raderar inte författarna från databasen
+            // TODO. Fungerar inte riktigt. Kontrollerar inte om författaren finns på flera litteraturer
+            var forfattare = litteratur.Forfattare.ToList();
+
+            if (forfattare != null && forfattare.Count > 0)
+            {
+                m_DbContext.Forfattar.RemoveRange(forfattare);
+            }
+            
             m_DbContext.Litteratur.Remove(litteratur);
         }
 
