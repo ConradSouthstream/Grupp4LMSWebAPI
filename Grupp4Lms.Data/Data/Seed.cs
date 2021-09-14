@@ -25,11 +25,15 @@ namespace Grupp4Lms.Data.Data
             {
                 Faker fake = new Faker("sv");
 
-                if (db.Forfattar.Any())
+                if (db.Forfattar.Any())                    
                     return;
 
-                db.Database.EnsureDeleted();
-                db.Database.Migrate();
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    db.Database.EnsureDeleted();
+                    db.Database.Migrate();
+                }
+                
 
                 // Skapa nivåer
 

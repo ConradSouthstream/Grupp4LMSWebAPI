@@ -388,7 +388,7 @@ namespace Grupp4Lms.Data.Repositories
         public void PutForfattare(Forfattare forfattare)
         {
             if (forfattare is null)
-                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareAsync. Reference to forfattaren is null");
+                throw new ArgumentNullException("KurslitteraturRepository. PutForfattare. Reference to forfattaren is null");
 
             m_DbContext.Entry(forfattare).State = EntityState.Modified;
         }
@@ -420,7 +420,7 @@ namespace Grupp4Lms.Data.Repositories
         public async Task PostForfattareKopplaTillLitteraturAsync(Forfattare forfattare)
         {
             if (forfattare is null)
-                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareAsync. Reference to forfattaren is null");
+                throw new ArgumentNullException("KurslitteraturRepository. PostForfattareKopplaTillLitteraturAsync. Reference to forfattaren is null");
 
             if (forfattare.LitteraturId > 0)
             {

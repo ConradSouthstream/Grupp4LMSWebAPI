@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Migrations/
+/Grupp4Lms.Api/.config/dotnet-tools.json

@@ -51,8 +51,20 @@ namespace Grupp4Lms.Api
                 c.IncludeXmlComments(xmlCommentFullPathData);
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionStringproduction")));
+            }
+            else
+            {
+                /* "ConnectionStringDevelopment": "Server=(localdb)\\mssqllocaldb;Database=LmsGrupp4KursLitteratur;Trusted_Connection=True;MultipleActiveResultSets=true" */
+                //services.AddDbContext<ApplicationDbContext>(options =>
+                //    options.UseSqlServer(Configuration.GetConnectionString("ConnectionStringDevelopment")));
+
+                services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            }
 
             services.AddAutoMapper(typeof(MapperProfile));
 
@@ -62,12 +74,15 @@ namespace Grupp4Lms.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //EnvironmentName.Development
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp4Lms.Api v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp4Lms.Api v1"));
 
             app.UseHttpsRedirection();
 
